@@ -4,8 +4,8 @@ public class Enseignant extends Personnel {
 
     private String echelon;
     private final float fixe;
-    final static private float prime = 1000;
-    final static float taux = 1.2f;
+    private final static  float prime = 1000;
+    private final static float taux = 1.2f;
     private int decharges;
     private int tempsATravailler;
     private int tempsTravaille;
@@ -39,7 +39,7 @@ public class Enseignant extends Personnel {
         int heureSupp = tempsTravaille - decharges - tempsATravailler;
         if (heureSupp >= 0)
         {
-            salaire += prime + heureSupp*taux; // ajoute la prime si le temps à travailler est effectué et les heures supp payées
+            salaire += prime + heureSupp*taux*fixe; // ajoute la prime si le temps à travailler est effectué et les heures supp payées
         }
 
         return salaire;

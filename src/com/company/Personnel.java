@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 
 abstract class Personnel extends Personne{
 
-    private String dateEntrée;
-    private float tempsTravail;
+    protected String dateEntrée;
+    protected float tempsTravail;
 
     Personnel(String dateEntree, float tempsTravail, String nom, String prenom){
         super(nom, prenom);

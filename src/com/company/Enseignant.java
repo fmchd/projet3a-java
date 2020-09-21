@@ -35,11 +35,11 @@ public class Enseignant extends Personnel {
     @Override
     public float calculSalaire() {
         float salaire = 0f;
-        salaire += tempsTravail/100*fixe;  // calcul le fixe
-        int heureSupp = tempsTravaille - decharges - tempsATravailler;
+        salaire += this.tempsTravail/100*this.fixe;  // calcul le fixe
+        int heureSupp = this.tempsTravaille - this.decharges - this.tempsATravailler;
         if (heureSupp >= 0)
         {
-            salaire += prime + heureSupp*taux*fixe; // ajoute la prime si le temps à travailler est effectué et les heures supp payées
+            salaire += this.prime + heureSupp*this.taux*this.fixe; // ajoute la prime si le temps à travailler est effectué et les heures supp payées
         }
 
         return salaire;

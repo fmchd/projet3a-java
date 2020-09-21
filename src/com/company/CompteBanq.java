@@ -73,43 +73,58 @@ public class CompteBanq {
 
     public void actions(){
         Scanner entree = new Scanner(System.in);
-        while (true){
-            System.out.println("Effectuer une action : versement (1) - retrait (2) - quitter (3)");
-            int choix = entree.nextInt();
-            switch (choix) {
-                case 1 : {
-                    System.out.println("Entrer votre code :");
-                    String code = entree.nextLine();
-                    code = entree.nextLine();
-                    if (code.equals(this.code1)) {
-                        System.out.println("Entrer le montant à verser (en €):");
-                        int montant = entree.nextInt();
-                        versement(code1, montant);
-                        System.out.println("Nouveau solde :" + this.solde + "€");
-                    }else{
-                        System.out.println("Code erroné, veuillez recommencer.");
+        try
+        {
+                while (true) {
+                System.out.println("Effectuer une action : versement (1) - retrait (2) - quitter (3)");
+                if (entree.hasNextInt())
+                {
+                    int choix = entree.nextInt();
+                    switch (choix) {
+                        case 1: {
+                            System.out.println("Entrer votre code :");
+                            String code = entree.nextLine();
+                            code = entree.nextLine();
+                            if (code.equals(this.code1)) {
+                                System.out.println("Entrer le montant à verser (en €):");
+                                int montant = entree.nextInt();
+                                versement(code1, montant);
+                                System.out.println("Nouveau solde :" + this.solde + "€");
+                            } else {
+                                System.out.println("Code erroné, veuillez recommencer.");
+                            }
+                            break;
+                        }
+                        case 2: {
+                            System.out.println("Entrer son code :");
+                            String code = entree.nextLine();
+                            code = entree.nextLine();
+                            if (code.equals(this.code1)) {
+                                System.out.println("Entrer le montant à retirer (en €):");
+                                int montant = entree.nextInt();
+                                retrait(code1, montant);
+                                System.out.println("Nouveau solde :" + this.solde + "€");
+                            } else {
+                                System.out.println("Code erroné, veuillez recommencer.");
+                            }
+                            break;
+                        }
+                        case 3: {
+                            return;
+                        }
+                        default:
+                            System.out.println("Pas bon");
                     }
-                    break;
                 }
-                case 2 : {
-                    System.out.println("Entrer son code :");
-                    String code = entree.nextLine();
-                    code = entree.nextLine();
-                    if (code.equals(this.code1)) {
-                        System.out.println("Entrer le montant à retirer (en €):");
-                        int montant = entree.nextInt();
-                        retrait(code1, montant);
-                        System.out.println("Nouveau solde :" + this.solde + "€");
-                    }else{
-                        System.out.println("Code erroné, veuillez recommencer.");
-                    }
-                    break;
-                }
-                case 3 : {
-                    return;
+                else
+                {
+                    throw new NonIntException();
                 }
             }
-
+        }
+        catch (NonIntException expt)
+        {
+            actions();
         }
     }
 

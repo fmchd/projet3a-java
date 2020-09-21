@@ -2,7 +2,8 @@ package com.company;
 
 public class Enseignant extends Personnel {
 
-    private int echelon;
+    private String echelon;
+    private final float fixe;
     final static private float prime = 1000;
     final static float taux = 1.2f;
     private int decharges;
@@ -11,20 +12,21 @@ public class Enseignant extends Personnel {
 
     Enseignant(String dateEntree, float tempsTravail, String echelon, int decharges, String nom, String prenom, int tempsTravaille){
         super(dateEntree, tempsTravail, nom, prenom);
-        if (echelon.equals("PRAG"))
+        this.echelon = echelon;
+        if (this.echelon.equals("PRAG"))
         {
-            this.echelon = 0;
             tempsATravailler = 192;
+            fixe = 1;
         }
-        else if (echelon.equals("MDC"))
+        else if (this.echelon.equals("MDC"))
         {
-            this.echelon = 1;
             tempsATravailler = 384;
+            fixe = 2;
         }
         else
         {
-            this.echelon = 2;
             tempsATravailler = 96;
+            fixe = 3;
         }
         this.decharges = decharges;
         this.tempsTravaille = tempsTravaille;
@@ -32,23 +34,7 @@ public class Enseignant extends Personnel {
 
     @Override
     public float calculSalaire() {
-        float salaire = 0;
-        int fixe;
-        switch(echelon)
-        {
-            case 0:
-                fixe = 3;
-                break;
-            case 1:
-                fixe = 2;
-                break;
-            case 2:
-                fixe = 1;
-                break;
-            default:
-                fixe=0;
-                break;
-        }
+        float salaire = 0f;
         salaire += tempsTravail/100*fixe;  // calcul le fixe
         int heureSupp = tempsTravaille - decharges - tempsATravailler;
         if (heureSupp >= 0)

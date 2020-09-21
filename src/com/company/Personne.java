@@ -4,7 +4,6 @@ public class Personne {
 
     private String nom;
     private String prenom;
-    private int aLaCon;
     private String numSecu;
     private int anneeNaissance;
     private char sexe;

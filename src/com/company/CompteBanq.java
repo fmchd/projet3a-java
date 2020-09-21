@@ -76,7 +76,7 @@ public class CompteBanq {
             System.out.println("Effectuer une action : versement (1) - retrait (2) - quitter (3)");
             int choix = entree.nextInt();
             switch (choix) {
-                case 1 -> {
+                case 1 : {
                     System.out.println("Entrer votre code :");
                     String code = entree.nextLine();
                     code = entree.nextLine();
@@ -88,8 +88,9 @@ public class CompteBanq {
                     }else{
                         System.out.println("Code erroné, veuillez recommencer.");
                     }
+                    break;
                 }
-                case 2 -> {
+                case 2 : {
                     System.out.println("Entrer son code :");
                     String code = entree.nextLine();
                     code = entree.nextLine();
@@ -101,8 +102,9 @@ public class CompteBanq {
                     }else{
                         System.out.println("Code erroné, veuillez recommencer.");
                     }
+                    break;
                 }
-                case 3 -> {
+                case 3 : {
                     return;
                 }
             }

@@ -1,7 +1,7 @@
 package com.company;
 
 public class Bebe extends Enfant {
-    Bebe(){
-        super();
+    Bebe(String nom, String prenom){
+        super(nom,prenom);
     }
 }

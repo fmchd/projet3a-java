@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class CompteBanq {
 
     private String num;
-    private Personne client;
     private float solde;
     private float decouvertAutorise;
     private String code1;
@@ -27,9 +26,6 @@ public class CompteBanq {
         return num;
     }
 
-    public Personne getClient() {
-        return client;
-    }
 
     public float getSolde() {
         return solde;
@@ -50,7 +46,6 @@ public class CompteBanq {
 
     public CompteBanq(String num, Personne client, String code1, String code2){
         this.num = num;
-        this.client = client;
         this.code1 = code1;
         this.code2 = code2;
         this.solde = 0;
@@ -132,7 +127,6 @@ public class CompteBanq {
     public String toString() {
         return "CompteBanq{" +
                 "num='" + num + '\'' +
-                ", client=" + client +
                 ", solde=" + solde +
                 ", decouvertAutorise=" + decouvertAutorise +
                 ", code1='" + code1 + '\'' +

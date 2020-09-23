@@ -1,6 +1,6 @@
 package com.company;
 
-public class Ecolier extends Enfant implements Scolaire{
+public class Ecolier extends Enfant implements IScolaire {
 
     private final static String[] tableau = {"CP", "CE1", "CE2", "CM1", "CM2"};
     private String niveau;

@@ -8,6 +8,7 @@ public class Personne {
     private int anneeNaissance;
     private char sexe;
     private int deptNaissance;
+    private CompteBanq compteBanq;
 
 
     public String getNom() {
@@ -62,16 +63,29 @@ public class Personne {
         this.sexe = ' ';
         this.deptNaissance = 0;
         this.numSecu = "";
+        this.compteBanq = null;
     }
 
-    public Personne(String nom, String prenom, String numSecu){
+    public Personne(String nom, String prenom, String numSecu, CompteBanq compteBanq){
         this.nom = nom;
         this.prenom = prenom;
         this.anneeNaissance = anneeNaissance(numSecu);
         this.sexe = sexe(numSecu);
         this.deptNaissance = deptNaissance(numSecu);
         this.numSecu = numSecu;
+        this.compteBanq = compteBanq;
     }
+
+    public Personne(String nom,String prenom, CompteBanq compteBanq){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.anneeNaissance = 1800;
+        this.sexe = ' ';
+        this.deptNaissance = 0;
+        this.numSecu = "";
+        this.compteBanq = compteBanq;
+    }
+
 
     private int anneeNaissance(String numSecu){
         if ( Integer.parseInt(numSecu.substring(1,3)) > 20){
@@ -118,5 +132,13 @@ public class Personne {
         personne += '}';
 
         return personne;
+    }
+
+    public void setCompteBanq(CompteBanq compteBanq) {
+        this.compteBanq = compteBanq;
+    }
+
+    public CompteBanq getCompteBanq() {
+        return compteBanq;
     }
 }

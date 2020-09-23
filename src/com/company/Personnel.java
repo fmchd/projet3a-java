@@ -16,5 +16,4 @@ abstract class Personnel extends Personne{
     }
 
     public abstract float calculSalaire();
-
 }

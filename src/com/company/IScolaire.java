@@ -1,7 +1,6 @@
 package com.company;
 
-public interface Scolaire {
-
+public interface IScolaire {
     boolean petit();
     boolean moyen();
     boolean grand();

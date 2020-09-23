@@ -113,7 +113,7 @@ public class CompteBanq {
                             return;
                         }
                         default:
-                            System.out.println("Pas bon");
+                            System.out.println("Veuillez rentrer 1 ou 2 ou 3");
                     }
                 }
                 else

@@ -5,6 +5,6 @@ public class NonIntException extends Exception {
     NonIntException()
     {
         super();
-        System.out.println("Exception NonInt");
+        System.out.println("Veuillez entrez un entier");
     }
 }

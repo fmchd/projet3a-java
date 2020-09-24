@@ -114,25 +114,29 @@ public class Personne {
     @Override
     public String toString() {
         String personne = "";
-        personne += "Personne{"
-                + "nom='" + nom + '\''
-                + ", prenom='" + prenom + '\'';
+        personne += "Personne{" + "\n"
+                + "     nom='" + nom + "\n"
+                + "     prenom='" + prenom + '\n';
         if (!this.numSecu.equals("")){
-            personne += ", numSecu='" + numSecu + '\'';
+            personne += "     numSecu='" + numSecu + '\n';
         }
         if (!(this.anneeNaissance == 1800)){
-            personne += ", anneeNaissance=" + anneeNaissance + '\'';
+            personne += "     anneeNaissance=" + anneeNaissance + '\n';
         }
         if (!(this.sexe == ' ')){
-            personne += ", sexe=" + sexe + '\'';
+            personne += "     sexe=" + sexe + '\n';
         }
         if (!(this.deptNaissance == 0)){
-            personne += ", deptNaissance=" + deptNaissance + '\'';
+            personne += "     deptNaissance=" + deptNaissance + '\n';
+        }
+        if (!(this.compteBanq == null)){
+            personne += "     " +  compteBanq.toString();
         }
         personne += '}';
 
         return personne;
     }
+
 
     public void setCompteBanq(CompteBanq compteBanq) {
         this.compteBanq = compteBanq;

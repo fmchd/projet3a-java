@@ -20,4 +20,12 @@ public class Magasin {
     public String getNom() {
         return nom;
     }
+
+    public void setCaisse(float caisse) {
+        this.caisse = caisse;
+    }
+
+    public float getCaisse() {
+        return caisse;
+    }
 }

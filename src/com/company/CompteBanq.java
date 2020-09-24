@@ -44,7 +44,7 @@ public class CompteBanq {
     }
 
 
-    public CompteBanq(String num, Personne client, String code1, String code2){
+    public CompteBanq(String num, String code1, String code2){
         this.num = num;
         this.code1 = code1;
         this.code2 = code2;
@@ -52,85 +52,48 @@ public class CompteBanq {
         this.decouvertAutorise = 0;
     }
 
-    public void versement(String code1, float montant){
-        if(this.code1 == code1) {
+    public CompteBanq(String num, String code1 , String code2, float solde, float decouvertAutorise){
+        this.num = num;
+        this.code1 = code1;
+        this.code2 = code2;
+        this.solde = solde;
+        this.decouvertAutorise = decouvertAutorise;
+    }
+
+    public void versement(float montant){
+        Scanner code1 = new Scanner(System.in);
+        if(this.code1.equals(code1.next()) ) {
             this.solde += montant;
         }
     }
 
     public void retrait(String code1, float montant){
-        if ((montant < solde + this.decouvertAutorise) & this.code1 == code1){
-            this.solde -= montant;
-        }
-        if ((montant < solde + this.decouvertAutorise))
+        if ((montant > solde + this.decouvertAutorise)) {
             System.out.println("Solde insuffisant");
-    }
-
-    public void actions(){
-        Scanner entree = new Scanner(System.in);
-        try
-        {
-                while (true) {
-                System.out.println("Effectuer une action : versement (1) - retrait (2) - quitter (3)");
-                if (entree.hasNextInt())
-                {
-                    int choix = entree.nextInt();
-                    switch (choix) {
-                        case 1: {
-                            System.out.println("Entrer votre code :");
-                            String code = entree.nextLine();
-                            code = entree.nextLine();
-                            if (code.equals(this.code1)) {
-                                System.out.println("Entrer le montant à verser (en €):");
-                                int montant = entree.nextInt();
-                                versement(code1, montant);
-                                System.out.println("Nouveau solde :" + this.solde + "€");
-                            } else {
-                                System.out.println("Code erroné, veuillez recommencer.");
-                            }
-                            break;
-                        }
-                        case 2: {
-                            System.out.println("Entrer son code :");
-                            String code = entree.nextLine();
-                            code = entree.nextLine();
-                            if (code.equals(this.code1)) {
-                                System.out.println("Entrer le montant à retirer (en €):");
-                                int montant = entree.nextInt();
-                                retrait(code1, montant);
-                                System.out.println("Nouveau solde :" + this.solde + "€");
-                            } else {
-                                System.out.println("Code erroné, veuillez recommencer.");
-                            }
-                            break;
-                        }
-                        case 3: {
-                            return;
-                        }
-                        default:
-                            System.out.println("Veuillez rentrer 1 ou 2 ou 3");
-                    }
-                }
-                else
-                {
-                    throw new NonIntException();
-                }
+        }else{
+            if (this.code1.equals(code1)){
+                this.solde -= montant;
+            }else{
+                System.out.println("Code eronné");
             }
         }
-        catch (NonIntException expt)
-        {
-            actions();
-        }
     }
+
+    public void paiement(float prix){
+        System.out.println("Veuillez saisir votre code :");
+        Scanner entree = new Scanner(System.in);
+        retrait(entree.nextLine(), prix);
+    }
+
 
     @Override
     public String toString() {
-        return "CompteBanq{" +
-                "num='" + num + '\'' +
-                ", solde=" + solde +
-                ", decouvertAutorise=" + decouvertAutorise +
-                ", code1='" + code1 + '\'' +
-                ", code2='" + code2 + '\'' +
+        return "CompteBanq{" + '\n' +
+                "       num='" + num + '\n' +
+                "       solde=" + solde + '\n' +
+                "       decouvertAutorise=" + decouvertAutorise + '\n' +
+                "       code1='" + code1 + '\n' +
+                "       code2='" + code2 + '\n' +
                 '}';
     }
 }

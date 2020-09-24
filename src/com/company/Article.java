@@ -3,10 +3,10 @@ package com.company;
 import java.util.Objects;
 
 public class Article implements IPublicite{
-    private String nom;
-    private float prix;
-    private int tauxSolde;
-    private Object proprietaire;
+    protected String nom;
+    protected float prix;
+    protected int tauxSolde;
+    protected Object proprietaire;
 
 
     Article(String nom, float prix, int tauxSolde){
@@ -33,18 +33,19 @@ public class Article implements IPublicite{
     }
 
     @Override
-    public String faitDeLaPub() {
+    public void faitDeLaPub() {
         if(this.proprietaire == null)
-            return "Venez acheter le produit "+this.nom;
-        if(this.proprietaire.getClass().getName().equals("Magasin")){
-            Magasin magasin = Magasin.class.cast(this.proprietaire);
-            return "Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom;
+            System.out.println("Venez acheter le produit "+this.nom);
+        if(this.proprietaire.getClass().getName().equals("com.company.Magasin")){
+            Magasin magasin = (Magasin) this.proprietaire;
+            // Magasin magasin = Magasin.class.cast(this.proprietaire);
+            System.out.println("Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom);
         }
-        if(this.proprietaire.getClass().getName().equals("Personne")){
-            Personne personne = Personne.class.cast(this.proprietaire);
-            return personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom;
+        if(this.proprietaire.getClass().getName().equals("com.company.Personne")){
+            Personne personne = (Personne) this.proprietaire;
+            // Personne personne = Personne.class.cast(this.proprietaire);
+            System.out.println(personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom);
         }
-        return null;
     }
 
     public String getNom() {

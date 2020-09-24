@@ -1,6 +1,11 @@
 package com.company;
 
 
+import com.company.article.Magasin;
+import com.company.article.Primeur;
+import com.company.banque.CompteBanq;
+import com.company.personne.Personne;
+
 public class Main {
 
     public static void main(String[] args) {

@@ -2,7 +2,7 @@ package com.company;
 
 import java.util.Objects;
 
-public class Article {
+public class Article implements IPublicite{
     private String nom;
     private float prix;
     private int tauxSolde;
@@ -33,18 +33,25 @@ public class Article {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Article article = (Article) o;
-        return Float.compare(article.prix, prix) == 0 &&
-                tauxSolde == article.tauxSolde &&
-                Objects.equals(nom, article.nom) &&
-                Objects.equals(proprietaire, article.proprietaire);
+    public String faitDeLaPub() {
+        if(this.proprietaire == null)
+            return "Venez acheter le produit "+this.nom;
+        if(this.proprietaire.getClass().getName().equals("Magasin")){
+            Magasin magasin = Magasin.class.cast(this.proprietaire);
+            return "Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom;
+        }
+        if(this.proprietaire.getClass().getName().equals("Personne")){
+            Personne personne = Personne.class.cast(this.proprietaire);
+            return personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom;
+        }
+        return null;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(nom, prix, tauxSolde, proprietaire);
+    public String getNom() {
+        return nom;
+    }
+
+    public int getTauxSolde() {
+        return tauxSolde;
     }
 }

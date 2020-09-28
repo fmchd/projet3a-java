@@ -1,5 +1,8 @@
 package com.company.article;
 
+import com.company.enfant.Enfant;
+import com.company.exception.NotOldEnoughException;
+import com.company.exception.pasDeCompteBancaireException;
 import com.company.personne.Personne;
 
 public class Habit extends Article implements IPublicite, IVendrePiece {
@@ -29,12 +32,35 @@ public class Habit extends Article implements IPublicite, IVendrePiece {
 
     @Override
     public void estAchete(Personne personne) {
-        if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin") && !(personne.getCompteBanq() == null)){
-            Magasin magasin = (Magasin) this.proprietaire;
-            // Magasin magasin = Magasin.class.cast(this.proprietaire);
-            this.setProprietaire(personne);
-            personne.getCompteBanq().paiement((1-this.tauxSolde) * this.prix);
-            magasin.setCaisse(magasin.getCaisse() + (1-this.tauxSolde) * this.prix);
+        try {
+            if (!(personne.getCompteBanq() == null)) {
+                if (this.proprietaire.getClass().getName().equals("com.company.article.Magasin")) {
+                    Magasin magasin = (Magasin) this.proprietaire;
+                    // Magasin magasin = Magasin.class.cast(this.proprietaire);
+                    this.setProprietaire(personne);
+                    magasin.setCaisse(magasin.getCaisse() + (1 - this.tauxSolde) * this.prix);
+                }
+            } else {
+                throw new pasDeCompteBancaireException();
+            }
+        } catch (pasDeCompteBancaireException e) {}
+    }
+
+    @Override
+    public void estAchete(Enfant enfant) {
+        if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin")){
+            try {
+                if (enfant.age() >= 10) {
+                    Magasin magasin = (Magasin) this.proprietaire;
+                    // Magasin magasin = Magasin.class.cast(this.proprietaire);
+                    this.setProprietaire(enfant);
+                    enfant.paiement((1 - this.tauxSolde) * this.prix);
+                    magasin.setCaisse(magasin.getCaisse() + (1 - this.tauxSolde) * this.prix);
+                } else {
+                    throw new NotOldEnoughException();
+                }
+            }catch(NotOldEnoughException e){
+            }
         }
     }
 

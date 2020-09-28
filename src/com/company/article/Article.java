@@ -1,6 +1,7 @@
 package com.company.article;
 
 import com.company.personne.Personne;
+import com.company.exception.pasEntre0et100Exception;
 
 public class Article implements IPublicite, ISolde {
     protected String nom;
@@ -66,8 +67,16 @@ public class Article implements IPublicite, ISolde {
     }
 
     @Override
-    public void lancerSolde(int taux) {
-        this.tauxSolde = taux;
+    public void lancerSolde(int taux) throws pasEntre0et100Exception {
+        try {
+            if (taux >= 0f && taux <= 100)
+                this.tauxSolde = taux;
+            else
+                throw new pasEntre0et100Exception();
+        }
+        catch (pasEntre0et100Exception e){
+            System.out.println("Veuillez réessayer avec une autre valeur");
+        }
     }
 
     @Override

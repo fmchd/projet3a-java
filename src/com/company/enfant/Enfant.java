@@ -1,12 +1,17 @@
 package com.company.enfant;
 
+import com.company.personne.Personne;
+
 public class Enfant {
 
-    private String nom;
-    private String prenom;
-    private int anneeNaissance;
-    private char sexe;
-    private int deptNaissance;
+    protected String nom;
+    protected String prenom;
+    protected int anneeNaissance;
+    protected char sexe;
+    protected int deptNaissance;
+    protected Personne parent;
+    protected float argentPoche;
+
 
     Enfant(String nom, String prenom, int anneeNaissance, char sexe, int deptNaissance){
         this.nom = nom;
@@ -14,6 +19,8 @@ public class Enfant {
         this.anneeNaissance = anneeNaissance;
         this.sexe = sexe;
         this.deptNaissance = deptNaissance;
+        this.parent = null;
+        this.argentPoche = 0;
     }
 
     Enfant(String nom, String prenom){
@@ -28,4 +35,20 @@ public class Enfant {
         return 2020 - anneeNaissance;
     }
 
+    public void setParent(Personne parent) {
+        this.parent = parent;
+    }
+
+    public void recevoirArgent(Personne parent, float montant){
+        if(this.parent.equals(parent)){
+            parent.getCompteBanq().paiement(montant);
+            this.argentPoche += montant;
+        }
+    }
+
+    public void paiement(float montant){
+        if(this.argentPoche > montant){
+            this.argentPoche -= montant;
+        }
+    }
 }

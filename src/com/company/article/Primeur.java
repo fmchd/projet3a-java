@@ -1,5 +1,7 @@
 package com.company.article;
 
+import com.company.enfant.Enfant;
+import com.company.exception.NotOldEnoughException;
 import com.company.personne.Personne;
 
 public class Primeur extends Article implements IVendreKilo, IPublicite {
@@ -32,6 +34,26 @@ public class Primeur extends Article implements IVendreKilo, IPublicite {
                 personne.getCompteBanq().paiement(poids * (1-this.tauxSolde) * this.prix);
                 return primeur;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public Article estAchete(Enfant enfant, float poids) {
+        if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin")) {
+            try {
+                if(enfant.age() >= 10) {
+                    if (this.kilo > poids) {
+                        Primeur primeur = new Primeur(this.nom, this.prix, this.tauxSolde, this.nutriments, poids);
+                        primeur.setProprietaire(enfant);
+                        this.kilo -= poids;
+                        enfant.paiement(poids * (1 - this.tauxSolde) * this.prix);
+                        return primeur;
+                    }
+                }else{
+                    throw new NotOldEnoughException();
+                }
+            }catch(NotOldEnoughException e){}
         }
         return null;
     }

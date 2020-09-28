@@ -2,6 +2,8 @@ package com.company.personne;
 
 import com.company.banque.CompteBanq;
 
+import java.util.ArrayList;
+
 public class Personne {
 
     private String nom;
@@ -11,6 +13,7 @@ public class Personne {
     private char sexe;
     private int deptNaissance;
     private CompteBanq compteBanq;
+    private static final ArrayList<Personne> listPersonnes = new ArrayList<Personne>();
 
 
     public String getNom() {
@@ -66,6 +69,7 @@ public class Personne {
         this.deptNaissance = 0;
         this.numSecu = "";
         this.compteBanq = null;
+        listPersonnes.add(this);
     }
 
     public Personne(String nom, String prenom, String numSecu, CompteBanq compteBanq){
@@ -146,5 +150,9 @@ public class Personne {
 
     public CompteBanq getCompteBanq() {
         return compteBanq;
+    }
+
+    public static ArrayList<Personne> getListPersonnes() {
+        return listPersonnes;
     }
 }

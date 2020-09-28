@@ -5,47 +5,48 @@ import com.company.exception.NotOldEnoughException;
 import com.company.exception.pasDeCompteBancaireException;
 import com.company.personne.Personne;
 
-public class Electromenager extends Article implements IVendrePiece {
-    private String dureeFonctionnement;
-    private boolean assurance;
-    private boolean sortiCarton;
+public class Alcool extends Article implements IVendrePiece, IPublicite{
 
-    public Electromenager(String nom, float prix, int tauxSolde, String dureeFonctionnement, boolean assurance){
+    private int volume;
+    private float degres;
+
+    Alcool(String nom, float prix, int tauxSolde, int volume, float degres){
         super(nom, prix, tauxSolde);
-        this.dureeFonctionnement = dureeFonctionnement;
-        this.assurance = assurance;
-        this.sortiCarton = false;
+        this.volume = volume;
+        this.degres = degres;
     }
 
     @Override
-    public void estAchete(Magasin magasin) {
-        if(this.proprietaire == null){
-            this.proprietaire  = magasin;
-            magasin.setCaisse(magasin.getCaisse() - (1-this.tauxSolde) * this.prix);
+    public void estAchete(Personne personne){
+        if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin") && !(personne.getCompteBanq() == null)){
+            try {
+                if (personne.calculAge() >= 18) {
+                    Magasin magasin = (Magasin) this.proprietaire;
+                    // Magasin magasin = Magasin.class.cast(this.proprietaire);
+                    this.setProprietaire(personne);
+                    try {
+                        if (!(personne.getCompteBanq() == null)) {
+                            personne.getCompteBanq().paiement((1 - this.tauxSolde) * this.prix);
+                            magasin.setCaisse(magasin.getCaisse() + (1 - this.tauxSolde) * this.prix);
+                        } else {
+                            throw new pasDeCompteBancaireException();
+                        }
+                    }catch (pasDeCompteBancaireException e){}
+                } else {
+                    throw new NotOldEnoughException();
+                }
+            }
+            catch(NotOldEnoughException e){
+                System.out.println("Veuillez grandir avant d'essayer d'acheter un tel article");
+            }
         }
     }
 
     @Override
-    public void estAchete(Personne personne) {
-        try {
-            if (!(personne.getCompteBanq() == null)) {
-                if (this.proprietaire.getClass().getName().equals("com.company.article.Magasin")) {
-                    Magasin magasin = (Magasin) this.proprietaire;
-                    // Magasin magasin = Magasin.class.cast(this.proprietaire);
-                    this.setProprietaire(personne);
-                    magasin.setCaisse(magasin.getCaisse() + (1 - this.tauxSolde) * this.prix);
-                }
-            } else {
-                throw new pasDeCompteBancaireException();
-            }
-        } catch (pasDeCompteBancaireException e) {}
-    }
-
-    @Override
-    public void estAchete(Enfant enfant) {
+    public void estAchete(Enfant enfant){
         if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin")){
             try {
-                if (enfant.age() >= 10) {
+                if (enfant.age() >= 18) {
                     Magasin magasin = (Magasin) this.proprietaire;
                     // Magasin magasin = Magasin.class.cast(this.proprietaire);
                     this.setProprietaire(enfant);
@@ -54,8 +55,18 @@ public class Electromenager extends Article implements IVendrePiece {
                 } else {
                     throw new NotOldEnoughException();
                 }
-            }catch (NotOldEnoughException e){
             }
+            catch (NotOldEnoughException e){
+                System.out.println("Veuillez grandir avant d'essayer d'acheter un tel article");
+            }
+        }
+    }
+
+    @Override
+    public void estAchete(Magasin magasin) {
+        if(this.proprietaire == null){
+            this.proprietaire  = magasin;
+            magasin.setCaisse(magasin.getCaisse() - (1-this.tauxSolde) * this.prix);
         }
     }
 
@@ -70,28 +81,22 @@ public class Electromenager extends Article implements IVendrePiece {
         }
     }
 
-    @Override
+
     public void faitDeLaPub() {
         if(this.proprietaire == null)
             System.out.println("Venez acheter le produit "+this.nom + "avec lequel vous pouvez prendre une garantie !");
         if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin")){
             Magasin magasin = (Magasin) this.proprietaire;
             // Magasin magasin = Magasin.class.cast(this.proprietaire);
-            System.out.println("Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom  + "avec lequel vous pouvez prendre une garantie !");
+            System.out.println("Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom  + "à consommer avec modération");
         }
         if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")){
             Personne personne = (Personne) this.proprietaire;
             // Personne personne = Personne.class.cast(this.proprietaire);
-            System.out.println(personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom + "avec lequel vous pouvez prendre une garantie !");
+            System.out.println(personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom + "à consommer avec modération");
         }
     }
 
-    @Override
-    public String toString() {
-        return "Electromenager{" +
-                "dureeFonctionnement='" + dureeFonctionnement + '\n' +
-                ", assurance=" + assurance +
-                ", sortiCarton=" + sortiCarton +
-                '}';
-    }
+
+
 }

@@ -91,10 +91,30 @@ public class Primeur extends Article implements IVendreKilo, IPublicite {
             }
             System.out.println(texte);
         }
-        else if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")){
+        else if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.IATOS")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Enseignant")){
             Personne personne = (Personne) this.proprietaire;
             // Personne personne = Personne.class.cast(this.proprietaire);
             texte = personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom;
+            if (nutriments.length > 0) {
+                texte += " avec ";
+                for (int i = 0; i < nutriments.length; i++){
+                    texte += nutriments[i];
+                    if (i < nutriments.length - 1)
+                        texte += ", ";
+                    else
+                        texte += ".";
+                }
+
+            }
+            System.out.println(texte);;
+        } else if(this.proprietaire.getClass().getName().equals("com.company.personne.Enfant")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Lyceen")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Collegien")){
+            Enfant enfant = (Enfant) this.proprietaire;
+            // Personne personne = Personne.class.cast(this.proprietaire);
+            texte = enfant.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom;
             if (nutriments.length > 0) {
                 texte += " avec ";
                 for (int i = 0; i < nutriments.length; i++){

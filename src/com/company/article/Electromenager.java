@@ -77,12 +77,21 @@ public class Electromenager extends Article implements IVendrePiece {
         if(this.proprietaire.getClass().getName().equals("com.company.article.Magasin")){
             Magasin magasin = (Magasin) this.proprietaire;
             // Magasin magasin = Magasin.class.cast(this.proprietaire);
-            System.out.println("Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom  + "avec lequel vous pouvez prendre une garantie !");
+            System.out.println("Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom  + " avec lequel vous pouvez prendre une garantie !");
         }
-        if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")){
+        if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.IATOS")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Enseignant")){
             Personne personne = (Personne) this.proprietaire;
             // Personne personne = Personne.class.cast(this.proprietaire);
-            System.out.println(personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom + "avec lequel vous pouvez prendre une garantie !");
+            System.out.println(personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom + " avec lequel vous pouvez prendre une garantie !");
+        }
+        if(this.proprietaire.getClass().getName().equals("com.company.personne.Enfant")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Collegien")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Lyceen")){
+            Enfant enfant = (Enfant) this.proprietaire;
+            // Personne personne = Personne.class.cast(this.proprietaire);
+            System.out.println(enfant.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom + " avec lequel vous pouvez prendre une garantie !");
         }
     }
 

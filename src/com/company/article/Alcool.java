@@ -90,7 +90,9 @@ public class Alcool extends Article implements IVendrePiece, IPublicite{
             // Magasin magasin = Magasin.class.cast(this.proprietaire);
             System.out.println("Le magasin " + magasin.getNom() + " vous propose de venir acheter " + this.nom  + "à consommer avec modération");
         }
-        if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")){
+        if(this.proprietaire.getClass().getName().equals("com.company.personne.Personne")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.IATOS")
+                || this.proprietaire.getClass().getName().equals("com.company.personne.Enseignant")){
             Personne personne = (Personne) this.proprietaire;
             // Personne personne = Personne.class.cast(this.proprietaire);
             System.out.println(personne.getPrenom() + " fait du bouche à oreille sur le produit " + this.nom + "à consommer avec modération");

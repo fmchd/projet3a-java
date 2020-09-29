@@ -51,4 +51,8 @@ public class Enfant {
             this.argentPoche -= montant;
         }
     }
+
+    public String getPrenom() {
+        return prenom;
+    }
 }

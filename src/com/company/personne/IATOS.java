@@ -5,7 +5,7 @@ public class IATOS extends Personnel {
     private float heureSupp;
     private final static float taux = 1.2f;
 
-    IATOS(String dateEntree, float tempsTravail, String nom, String prenom, float fixe, float heureSupp){
+    public IATOS(String dateEntree, float tempsTravail, String nom, String prenom, float fixe, float heureSupp){
         super(dateEntree, tempsTravail, nom, prenom);
         this.fixe = fixe;
         this.heureSupp = heureSupp;

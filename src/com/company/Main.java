@@ -7,6 +7,7 @@ import com.company.article.Primeur;
 import com.company.banque.CompteBanq;
 import com.company.banque.WriteToFile;
 import com.company.exception.pasEntre0et100Exception;
+import com.company.personne.IATOS;
 import com.company.personne.Personne;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, pasEntre0et100Exception {
 	    Personne Georges = new Personne("Dupont", "Georges");
-	    Personne Jean = new Personne("Tété", "Jean");
+	    IATOS Jean = new IATOS("12/02/2002", 2, "Tété", "Jean", 1200,3);
 	    Georges.setCompteBanq(new CompteBanq("1", "1234", "4567", 130, 0));
 
 
@@ -31,7 +32,8 @@ public class Main {
 		machineAlaver.estAchete(Jean);
 
 		Jean.setCompteBanq(new CompteBanq("2","1234", "1234", 430,0));
-
+		machineAlaver.estAchete(Jean);
+		machineAlaver.faitDeLaPub();
 
 		carottes.faitDeLaPub();
 	    carottes.estAchete(carrefour);
